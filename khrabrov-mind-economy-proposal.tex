@@ -1,0 +1,68 @@
+\documentstyle{article}
+
+\title{Mind Economy: Social Capital in Social Networks}
+
+\begin{document}
+
+
+\section{Introduction}
+
+	Given a large social network changing over time such as Twitter, how do we find key people who are important, influential, and have social capital -- and how do we formally define and measure these terms?  Computer and social scientists, economists, operation researchers, and educators have all proposed quantitative and qualitative approaches for describing social capital.  As a consequence, the term “social capital” is so widely [over]used sinсe the 1980s that some researchers shy away from it altogether [quote Johnson 2008].  Furthermore, the three qualities listed often overlap.  We define them usefully and distinctly for our networks, applying these new definitions to find interesting phenomena such as fandom economies of ratings and trends, and multi-modal collaboration of hackers, advancing open-source projects online via social coding.
+
+	The modern economy is knowledge-based, and knowledge generation closely corresponds to value and wealth creation.  The processes where knowledge is created, refined, and made actionable, are increasingly shifted into social networks on the Internet, embedded in social media sites such as Twitter and Facebook, or underlying cooperation on Wikipedia, the social coding portal GitHub, etc. Certain members and groups are key to the value-creating processes in these networks, where people are united by the information they work with.  Those individuals contributing the most and best knowledge, or processing it in the best way, are recognized as the main contributors, and get to set the agenda for the whole group. [Kleinberg and more Wikipedia cites].  Many communications are questions for the senior members, seeking explanation or coordination.  It is important to quantify which members gain importance in these mind economies to know how they work.
+	
+	The quintessential mind economy is the programmers’ community.  Their industry, spawning startups in the Bay Area, Pacific Northwest and elsewhere, trades in ideas becoming code becoming startups becoming large companies like Amazon and Google.  (In turn, the geeks' ethos epitomized by these companies reflects back on the society where they thrive.)  The resources traded by hackers are most commonly URLs of code repositories on GitHub, the open-source social coding portal.  GitHub is organized around Git, a distributed source code management system (SCM) authored by Linus Torvalds and originally used to develop the Linux kernel.  Now it is a de facto platform to collaborate on open-source projects.  While GitHub is used to store and modify the code, people working on it often converse on the Internet Relay Chat (IRC) and Twitter.  Some of the most active geek communities on Twitter center on advanced programming languages such as \#scala, \#clojure, and \#haskell -- these are the ``hash tags'' used to mark tweets so that they can be found as a group.  Coincidentally, these are also the names of the corresponding IRC channels.
+	
+	Another community with high traffic is what we call Justin Bieber ecosystem, described in [SocialCom 2010].  Justin Bieber is a boy pop-singer phenomenon, originating on the YouTube and spawning an intense following there and on Twitter.  Many of his fans are teenage girls with a variation of “bieber” in their Twitter nick and are united in their adoration of @justinbieber and pushing him up into the top 10 trending topics on Twitter.  In this process, the members learn to increase their own ratings by swapping shoutouts (mentions) and trading shoutouts for follows.  An economy of rating-increasing behavior develops.  Those who get followed by Justin Bieber increase their standing among the “beliebers” immensely, as do those who organize other fans around better schemes “how to meet Justin.”
+
+\section{Approach}
+	
+	In this thesis, we approach the problem of importance via dynamic analysis of the communication graphs. We build a communication graph of mentions, where one user talks to another via public tweets.  E.g., if @alice tweets: “@bob did you see this: http://bit.ly/xyz”, she replies to @bob, who is her replier, while she is his mentioner.  While many Twitter analyses and ranking sites focus on the number of followers [Twitter ranking sites and papers], we prefer communication as a form of active behavior with many social implications, manifesting itself similarly in social media networks, email networks, and real life.
+	
+	Traditional sociology measures betweenness and centrality on static graphs [some cites to Coleman et al.].  Their networks are small and their tools are often Excel spreadsheets and add-ons.  By contrast, our data subset consists of a 100 million tweets by 5 million users, with both numbers growing over the period of 35 days. (In turn, our subset is selected from the “gardenhose,” a Streaming API for a “statistically representative” fraction of Twitter, spewing now 5 million tweets daily, from which we collected billions of tweets.)  We have to take temporal nature of these data into account as a key feature of the model.
+
+\subsection{Importance}
+
+	First, we propose a measure of importance we call Dynamic PageRank, or D-Rank.  For every day in the study, we treat the communication graph as a directed multigraph (as Alice can easily tweet Bob thrice day) and compute the PageRank of all the nodes present that day.  We translate such PageRanks into relative ranks, from 0 to 1, showing where the node stands in the overall sorted list of ranks.
+
+	We then define StarRank as a ratio of a node’s D-Rank to the average D-Rank of its communication partners.  There are also variations where we count a node’s repliers and his mentioners either together or separately.  Both D-Rank and StarRank can be compared across days, even though the number of nodes on Twitter increases every day.
+
+\subsection{Social Capital}
+
+	We propose a mathematically well-defined measure of Social Capital, which we call Karmic Social Capital, which accrues for those dialogue participants who better maintain their question-answer balance in conversations -- reply to those who address them, and get replies from those to whom they talked before.  This capital can also favor stronger ties, where you keep talking to your current interlocutors, or it can reward exploration of new partners.  The model is parameterized with weights (rewards) for different kinds of behaviors, and previous capital decays with time.
+	
+	Most definitions of Social Capital are in fact just other kinds of importance measures.  E.g. Getoor [Friendship-Events Networks] simply uses that to denote the number of your co-authors on conference program committees.  A good review of the definitions of social capital used in computer science is provided in [Saskatchewan Ph.D. thesis on Social Capital in online education networks].  We model our Karmic Social Capital on the social capital of villagers who remember how many times they lent you salt, and how many times they got even by borrowing from you in turn along with getting some anchovies too.  A good working description of this kind of village social capital is provided in [Living in Tuscany].  Every villager has a clear mental balance of the favors given and received, which figures in every subsequent social and economic transaction.  @done(2010-07-27)
+	
+	Our first computational model is ``karmic'' repayment of communications -- instead of a carefully maintained balance of favors, we have a communication network where you repay questions/mentions by replying.  There's a temporal notion of accumulation, along with the decay.  Appendix A contains the full mathematical definition of the Karmic Social Capital for communication balances.
+
+\subsection{Influence}
+	
+	On the Wikipedia, influence is exerted by respected editors who attract other members to the articles they work on. [Kleinberg 2010]  In LiveJournal, members are more attracted to communities where at least two of their friends already are members themselves [Backstrom 2006], so that “pulling into a group” is a form of influence which can be attracted to the original members.
+	
+	For Twitter, some forms of influence are
+	
+\begin{enumerate}
+\item talking to a friend of an influential friend, i.e. making friends through him
+\item adopting URLs, hashtags, or words from an influential member
+\item Talking to the influential friend is covered by importance.  Influence implies adoption of a behavior, or in general a new behavior, a dynamic process.
+\end{enumerate}
+
+It remains to be seen how we can define and explore influence in a form related to our social capital and importance.
+
+\section{Data Mining}
+
+	Given our metrics of importance and social capital, we explore interesting individuals from our large Twitter data set and interpret what these metrics mean in real life. 
+	
+	For Justin Bieber ecosystem, our summary of getting lucky in social networks is as follows: ``You probably won’t be Justin Bieber, but you can well become Amanda Demarest.''  As a top fan of Justin Bieber, Amanda cultivates the rest of the fan base and short-cuts from the fan groups she shepherds to Justin himself and back.  She is a community leader and her StarRank takes on the qualities of a real celebrity’s StarRank.  As opposed to Justin, who was projected into Twitter from YouTube and went on to break onto the traditional celebrity stage, Amanda is an in-network phenomena, using solely observable and reproducible network mechanisms to get ahead (``and so can you'').  We describe the whole economy of rank and mindshare, where Bieber fans learn, from their Twitter and real-life infancy, to work the system so that their topics trend universally, and each other’s rankings are enhanced as a result of the exchanges in this “mind economy”.
+	
+	For the hacker communities, we can check our Social Capital measures against actual coding productivity and following on GitHub and question answering on the IRC.  Most open-source projects consists of a few key contributors and many onlookers, casual participants, and cheerleaders.  A successful leader is commonly both the key producer as well as a deft communicator.  We endeavor to identify several leaders, fans, and onlookers for projects involving the worlds of \#haskell, \#scala, and \#clojure, and develop a way to extract the whole such community from Twitter along with the roles our twitterers play in it.  This is the first approach for Social Capital evaluation with multi-modal online presence and actual “ground truth” in value creation.  It will require NLP techniques and the extent of this may be limited in the original thesis work, but constitutes an important research direction.
+
+\section{Additional Questions}
+
+\begin{enumerate}
+\item Why do people twitter?  What is the utility and can it be captured by a form of social capital?  Can a single definition suffice for all members of a network?  Do ``beliebers'' differ from hackers and how, w.r.t. their forms of social capital and behaviors increasing it?
+\item How can you increase your social capital or importance in the fastest, or most robust (irreversible) way?  How can we distinguish scammers from real gems?
+\end{enumerate}
+
+\end{document}
+

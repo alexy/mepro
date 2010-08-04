@@ -1,0 +1,617 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Definitions.
+ 
+\emph on
+Repliers
+\emph default
+ of a node are the addressees of its tweets.
+ 
+\emph on
+Mentioners
+\emph default
+ of a node are those who tweet to it.
+ If a tweet from 
+\emph on
+@Alice 
+\emph default
+mentions 
+\emph on
+@Bob
+\emph default
+, then 
+\emph on
+@Bob
+\emph default
+ is a replier of 
+\emph on
+@Alice
+\emph default
+ and 
+\emph on
+@Alice
+\emph default
+ is a mentioner of 
+\emph on
+@Bob
+\emph default
+.
+ Replier of a node is someone that that node repliers 
+\emph on
+to
+\emph default
+.
+ In other words, from a node's perspective, repliers are out-degree, mentioners
+ are in-degree.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="2">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="4in">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+definition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula $S_{v}^{t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Social Capital of node 
+\begin_inset Formula $v$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Superscript 
+\begin_inset Formula $t$
+\end_inset
+
+ generally denotes 
+\begin_inset Quotes eld
+\end_inset
+
+by time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\begin_inset Quotes erd
+\end_inset
+
+ Specifically 
+\emph on
+during
+\emph default
+ time step 
+\begin_inset Formula $t$
+\end_inset
+
+ is denoted as 
+\begin_inset Formula $@t$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G^{t}(V,E)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+graph 
+\begin_inset Formula $G$
+\end_inset
+
+ with nodes 
+\begin_inset Formula $V$
+\end_inset
+
+ and edges 
+\begin_inset Formula $E$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w_{uv}^{@t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+total weight of directed edges 
+\begin_inset Formula $u\rightarrow v$
+\end_inset
+
+, i.e.
+ the number of tweets from 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $v$
+\end_inset
+
+ during time step 
+\begin_inset Formula $@t$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $W_{uv}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+total number of undirected edges between 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+: 
+\begin_inset Formula $W_{uv}=w_{uv}+w_{vu}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $B_{uv}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Balance of back and forth tweets from 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $v$
+\end_inset
+
+: 
+\begin_inset Formula $B_{uv}=w_{uv}-w_{vu}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $M_{u}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\{v|w_{vu}>0\}$
+\end_inset
+
+, i.e.
+ the mentioners of 
+\begin_inset Formula $u$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{u}^{@t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\{v|w_{uv}^{@t}>0\}$
+\end_inset
+
+, i.e.
+ repliers of 
+\begin_inset Formula $u$
+\end_inset
+
+ specifically during the timestep @
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O_{uv}^{@t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+outgoing activity of a node rewarded by social capital at timestep 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{uv}^{@t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+incoming activity in this cycle rewarded just for mentions (all)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $B_{uv}^{@t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+incoming mentions in this cycle repaying previous replies (balance)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\alpha,\beta,\gamma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+model parameters
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula \begin{eqnarray*}
+O_{u}^{@t} & = & \frac{1}{\sum_{V^{t-1}}O^{@t-1}}\sum_{v\in M_{u}^{t-1}\cap R_{u}^{@t-1}|B_{uv}^{t-1}<0}|B_{uv}^{t-1}|w_{uv}^{@t-1}W_{uv}^{t-1}S_{v}^{t-1}\\
+B_{u}^{@t} & = & \frac{1}{\sum_{V^{t-1}}B^{@t}}\sum_{v\in M_{u}^{@t-1}|B_{uv}^{t-1}>0}B_{uv}^{t-1}w_{vu}^{@t-1}W_{uv}^{t-1}S_{v}^{t-1}\\
+A_{u}^{@t} & = & \frac{1}{\sum_{V^{t-1}}B^{@t}}\sum_{v\in M_{u}^{@t-1}}w_{vu}^{@t-1}W_{uv}^{t-1}S_{v}^{t-1}\\
+I_{u}^{@t} & = & \gamma B_{u}^{t-1}+(1-\gamma)A_{u}^{t-1}\\
+S_{u}^{t} & = & \alpha S_{u}^{t-1}+(1-\alpha)(\beta O_{u}^{t-1}+(1-\beta)(\gamma B_{u}^{t-1}+(1-\gamma)A_{u}^{t-1})\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Some notes on the definitions.
+ 
+\begin_inset Formula $O_{u}^{t}$
+\end_inset
+
+ is the node 
+\begin_inset Formula $u$
+\end_inset
+
+'s output gaining social capital, thus we want to reward those who redress
+ an imbalance of input and answer those who addressed you more than you
+ had answered them.
+ The summation is defined exactly over those with whom you have a deficit
+ in replying: 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $v\in M_{u}^{t-1}\cap R_{u}^{@t-1}|B_{uv}^{t-1}<0$
+\end_inset
+
+.
+ It means the target node mentioned you at some point prior, you replied
+ to it in this cycle, and before that, you owed it a reply since it tweeted
+ more to you than you did to it.
+ For each such deficit node you replied to, finally, we multiply the number
+ of replies in that cycle, 
+\begin_inset Formula $w_{uv}^{@t-1}$
+\end_inset
+
+, by the balance you owed, 
+\begin_inset Formula $|B_{uv}^{t-1}|$
+\end_inset
+
+, the value of the relationship, 
+\begin_inset Formula $W_{uv}^{t-1}$
+\end_inset
+
+, and the importance of the replier 
+\begin_inset Formula $S_{v}^{t-1}$
+\end_inset
+
+.
+ We normalize the 
+\begin_inset Formula $O$
+\end_inset
+
+'s so that they all sum to 1, and reward each node proportionally to the
+ value of the redress in the reply imbalance it actively contributed in
+ this cycle.
+\end_layout
+
+\begin_layout Standard
+Similarly, 
+\begin_inset Formula $I_{u}^{t}$
+\end_inset
+
+ is the node 
+\begin_inset Formula $u$
+\end_inset
+
+'s input worth of social capital.
+ We generally consider all input as good -- we can't distinguish bad publicity,
+ or consider it all good anyways -- but we distinguish mentions redressing
+ the mentioners' own deficit with us as worthing more than just any mention.
+ Those repaying mentions we reward with a multiplier for the balance owed
+ additionally to the usual cycle contribution, relationship value, and the
+ mentioner's social capital.
+\end_layout
+
+\begin_layout Standard
+Note that in the output, we don't have a general activity term for all replies,
+ even those not redressing an imbalance, as we do in the second term of
+ the input.
+ Thus we don't reward random replying, and you won't get social capital
+ by just addressing everybody in volume.
+\end_layout
+
+\begin_layout Standard
+It's easy to see that such a definition of social capital allows for an
+ iterative economy by launching the update rule defining 
+\begin_inset Formula $S_{u}^{t}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $S_{u}^{t-1}$
+\end_inset
+
+as shown in the last formula above.
+ 
+\end_layout
+
+\end_body
+\end_document

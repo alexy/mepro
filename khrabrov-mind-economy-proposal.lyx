@@ -1,0 +1,604 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Mind Economy:
+\begin_inset Newline newline
+\end_inset
+
+ Social Capital in Social Networks
+\end_layout
+
+\begin_layout Author
+Alexy Khrabrov
+\begin_inset Newline newline
+\end_inset
+
+
+\size small
+Ph.D.
+ Candidate, Computer and Information Systems, University of Pennsylvania
+\begin_inset Newline newline
+\end_inset
+
+Research Associate, Thayer School of Engineering, Dartmouth College
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Given a large social network changing over time such as Twitter, how do
+ we find the key people who are important, influential in some sense, and
+ have certain social capital -- and how do we formally define and measure
+ these terms? Computer and social scientists, economists, operation researchers,
+ and educators have all proposed quantitative and qualitative approaches
+ for describing social capital.
+ As a consequence, the term “social capital” is so widely [over]used sinсe
+ the 1980s that some researchers shy away from it altogether 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jackson2008social"
+
+\end_inset
+
+.
+ Furthermore, the three qualities listed often overlap.
+ We define them usefully and distinctly for our networks, applying these
+ new definitions to find interesting phenomena such as fan-based economies
+ of ratings and trends, and multi-modal collaboration of hackers, advancing
+ open-source projects online via social coding.
+\end_layout
+
+\begin_layout Standard
+The modern economy is knowledge-based, and knowledge generation closely
+ corresponds to value and wealth creation.
+ The processes where knowledge is created, refined, and made actionable,
+ are increasingly shifted into social networks on the Internet, embedded
+ in social media sites such as Twitter and Facebook, or underlying cooperation
+ on Wikipedia, the social coding portal GitHub, etc.
+ Certain members and groups are key to the value-creating processes in these
+ networks, where people are united by the information they work with.
+ Those individuals contributing the most and best knowledge, or processing
+ it in the best way, are recognized as the main contributors, and get to
+ set the agenda for the whole group .
+ Many communications are questions for the senior members, seeking explanation
+ or coordination.
+ It is important to quantify which members gain importance in these mind
+ economies to know how they work.
+\end_layout
+
+\begin_layout Standard
+The quintessential mind economy is the programmers’ community.
+ Their industry, spawning startups in the Bay Area, Pacific Northwest and
+ elsewhere, trades in ideas becoming code becoming startups becoming large
+ companies like Amazon and Google.
+ (In turn, the geeks' ethos epitomized by these companies reflects back
+ on the society where they thrive.) The resources traded by hackers are most
+ commonly URLs of code repositories on GitHub, the open-source social coding
+ portal.
+ GitHub is organized around Git, a distributed source code management system
+ (SCM) authored by Linus Torvalds and originally used to develop the Linux
+ kernel.
+ Now it is a de facto platform to collaborate on open-source projects.
+ While GitHub is used to store and modify the code, people working on it
+ often converse on the Internet Relay Chat (IRC) and Twitter.
+ Some of the most active geek communities on Twitter center on advanced
+ programming languages such as 
+\emph on
+#scala
+\emph default
+, 
+\emph on
+#clojure
+\emph default
+, and 
+\emph on
+#haskell
+\emph default
+ -- these are the 
+\begin_inset Quotes eld
+\end_inset
+
+hash tags
+\begin_inset Quotes erd
+\end_inset
+
+ used to mark tweets so that they can be found as a group.
+ Coincidentally, these are also the names of the corresponding IRC channels.
+\end_layout
+
+\begin_layout Standard
+Another community with high traffic is what we call Justin Bieber ecosystem,
+ discovered and described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Khrabrov:2010:Dynamic"
+
+\end_inset
+
+.
+ Justin Bieber is a boy pop-singer phenomenon, originating on the YouTube
+ and spawning an intense following there and on Twitter.
+ Many of his fans are teenage girls with a variation of “bieber” in their
+ Twitter nick and are united in their adoration of @justinbieber and pushing
+ him up into the top 10 trending topics on Twitter.
+ In this process, the members learn to increase their own ratings by swapping
+ shoutouts (mentions) and trading shoutouts for follows.
+ An economy of rating-increasing behavior develops.
+ Those who get followed by Justin Bieber increase their standing among the
+ “beliebers” immensely, as do those who organize other fans around better
+ schemes “how to meet Justin.” High-intensity group behaviors are key in
+ social dynamics and change, and can be studied for the first time on a
+ coherent social organism of a Twitter community with its drivers and influencer
+s, and the methods they use to direct it.
+\end_layout
+
+\begin_layout Section
+Approach
+\end_layout
+
+\begin_layout Standard
+In this thesis, we approach the problem of importance via dynamic analysis
+ of the communication graphs.
+ We build a communication graph of mentions, where one user talks to another
+ via public tweets.
+ E.g., if @alice tweets: “@bob did you see this: http://bit.ly/xyz”, she 
+\emph on
+replies
+\emph default
+ to @bob, who is thus her 
+\emph on
+replier
+\emph default
+, while she is his 
+\emph on
+mentioner
+\emph default
+.
+ While many Twitter analyses and ranking sites focus on the number of followers
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "java2007we"
+
+\end_inset
+
+, we prefer communication as a form of active behavior with its many social
+ implications, manifesting itself similarly in social media networks, email
+ networks, and real life.
+\end_layout
+
+\begin_layout Standard
+Traditional sociology measures betweenness and centrality on static graphs
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bonacich1987power"
+
+\end_inset
+
+.
+ Their networks are small and their tools are often Excel spreadsheets and
+ add-ons.
+ By contrast, our data subset consists of a 100 million tweets by 5 million
+ users, with both numbers growing over the period of 35 days.
+ (In turn, our subset is selected from the “gardenhose,” a Streaming API
+ for a “statistically representative” fraction of Twitter, spewing now 5
+ million tweets daily, from which we collected billions of tweets.) We have
+ to take temporal nature of these data into account as a key feature of
+ the model.
+\end_layout
+
+\begin_layout Subsection
+Importance
+\end_layout
+
+\begin_layout Standard
+First, we propose a measure of importance we call Dynamic PageRank, or D-Rank
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Khrabrov:2010:Dynamic"
+
+\end_inset
+
+.
+ For every day in the study, we treat the communication graph as a directed
+ multigraph (as Alice can easily tweet Bob thrice day) and compute the PageRank
+ of all the nodes present that day.
+ We translate such PageRanks into relative ranks, from 0 to 1, showing where
+ the node stands in the overall sorted list of ranks.
+\end_layout
+
+\begin_layout Standard
+We then define StarRank as a ratio of a node’s D-Rank to the average D-Rank
+ of its communication partners.
+ There are also variations where we count a node’s repliers and his mentioners
+ either together or separately.
+ Both D-Rank and StarRank can be compared across days, even though the number
+ of nodes on Twitter increases every day.
+\end_layout
+
+\begin_layout Subsection
+Social Capital
+\end_layout
+
+\begin_layout Standard
+We propose a mathematically well-defined measure of Social Capital, which
+ we call Karmic Social Capital, which accrues for those dialogue participants
+ who better maintain their question-answering balance in conversations --
+ they do reply to those who address them, and get replies from those to
+ whom they talked before.
+ This capital can also favor stronger ties, where you keep talking to your
+ current interlocutors, or it can reward exploration of new partners.
+ The model is parameterized with weights (rewards) for different kinds of
+ behaviors, and previous capital decays with time.
+\end_layout
+
+\begin_layout Standard
+Most definitions of Social Capital are in fact just other kinds of importance
+ measures.
+ E.g.
+ Getoor 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Licamele:2005:Benefit"
+
+\end_inset
+
+ simply uses that to denote the number of your co-authors on conference
+ program committees.
+ A good review of the definitions of social capital used in computer science
+ is provided in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Motidyang:2007:Thesis"
+
+\end_inset
+
+.
+ We model our 
+\emph on
+Karmic Social Capital
+\emph default
+ on the social capital of Tuscany villagers who remember how many times
+ they lent everyday items like salt to each other, versus how many times
+ they got even by borrowing some anchovies, or more salt, in return.
+ A good working description of this kind of local social capital is provided
+ in e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gaggio:2007:Gold"
+
+\end_inset
+
+.
+ Every community member in those social-capital-rich areas has a clear mental
+ balance of the favors given and received, which figures in every subsequent
+ social and economic transaction.
+\end_layout
+
+\begin_layout Standard
+Our first computational model is 
+\begin_inset Quotes eld
+\end_inset
+
+karmic
+\begin_inset Quotes erd
+\end_inset
+
+ repayment of communications -- instead of a carefully maintained balance
+ of favors, we have a communication network where you repay questions (mentions)
+ by replying (mentioning in return).
+ There's a temporal notion of capital accumulation, along with its decay
+ in the face of inaction.
+ Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Social-Capital-Definitions"
+
+\end_inset
+
+ contains the full mathematical definition of the Karmic Social Capital
+ for communication balances.
+\end_layout
+
+\begin_layout Subsection
+Influence
+\end_layout
+
+\begin_layout Standard
+On the Wikipedia, influence is exerted by respected editors who attract
+ other members to the articles they work on 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cosley2010sequential"
+
+\end_inset
+
+.
+ In LiveJournal, members are more attracted to communities where at least
+ two of their friends already are members themselves 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Backstrom:2006:Membership"
+
+\end_inset
+
+, so that “pulling into a group” is a form of influence which can be attached
+ to the original members.
+\end_layout
+
+\begin_layout Standard
+For Twitter, some manifestations of influence are
+\end_layout
+
+\begin_layout Enumerate
+getting to talk to a friend of an influential friend, i.e.
+ facilitating friendships 
+\end_layout
+
+\begin_layout Enumerate
+adopting URLs, hashtags, or words from an influential member
+\end_layout
+
+\begin_layout Enumerate
+Replying back to the influential friend 
+\end_layout
+
+\begin_layout Standard
+The latter is covered by our capital measure.
+ In general, influence can imply adoption of a behavior, making others help
+ achieve a certain result, such as a globally trending topic, or simply
+ adopting a vocabulary.
+ It remains to be seen how we can define and explore influence in a form
+ related to our social capital and importance.
+\end_layout
+
+\begin_layout Section
+Data Mining
+\end_layout
+
+\begin_layout Standard
+Given our metrics of importance and social capital, we explore interesting
+ individuals from our large Twitter data set and interpret what these metrics
+ mean in real life.
+\end_layout
+
+\begin_layout Standard
+For Justin Bieber ecosystem, our summary of becoming somebody in social
+ networks goes as follows: 
+\begin_inset Quotes eld
+\end_inset
+
+You may not be a Justin, but you always can become an Amanda.
+\begin_inset Quotes erd
+\end_inset
+
+ As a top fan of Justin Bieber, Amanda D.
+ cultivates the rest of the fan base and short-cuts from the fan groups
+ she shepherds to Justin himself and back.
+ She is a community leader nd organizer, and her StarRank takes on the qualities
+ of a real celebrity’s StarRank.
+ As opposed to Justin, who was projected into Twitter from YouTube and went
+ on to break onto the traditional celebrity stage, Amanda is an all in-network
+ phenomena, using solely observable and reproducible network mechanisms
+ to get ahead (
+\begin_inset Quotes eld
+\end_inset
+
+and so can you
+\begin_inset Quotes erd
+\end_inset
+
+).
+ We describe the whole economy of rank and mindshare, where Bieber fans
+ learn, from their Twitter and real-life infancy, to work the system so
+ that their topics trend universally, and each other’s rankings are enhanced
+ as a result of their exchanges in this new “mind economy”.
+\end_layout
+
+\begin_layout Standard
+For the hacker communities, we can check our Social Capital measures against
+ the actual coding productivity, followings on GitHub, and question answering
+ on the IRC.
+ Most open-source projects consists of a few key contributors and many onlookers
+, casual participants, and cheerleaders.
+ A successful leader is ideally both the key producer as well as a deft
+ communicator.
+ We endeavor to identify several leaders, fans, and onlookers for the projects
+ and communities involving the worlds of 
+\emph on
+#haskell
+\emph default
+, 
+\emph on
+#scala
+\emph default
+, and 
+\emph on
+#clojure
+\emph default
+, and develop a way to extract the whole such community from Twitter together
+ with the roles which our twitterers play in it.
+ This approach to Social Capital evaluation with multi-modal online presence
+ defines an actual “ground truth” in value creation, so that the capital
+ update rules can be checked against it.
+ It will require NLP techniques, the extent of which may be limited in the
+ original thesis work, but will constitute an important research direction.
+\end_layout
+
+\begin_layout Section
+Additional Questions
+\end_layout
+
+\begin_layout Standard
+While answering the core questions of this thesis, we may gain insights
+ into some deeper, philosophical ones, which may allow for more quantitative
+ treatment with our metrics:
+\end_layout
+
+\begin_layout Enumerate
+Why do people twitter? What is the utility and can it be captured by a form
+ of social capital? Can a single definition suffice for all members of a
+ network? Do 
+\begin_inset Quotes eld
+\end_inset
+
+beliebers
+\begin_inset Quotes erd
+\end_inset
+
+ differ from hackers and how, w.r.t.
+ their forms of social capital and behaviors increasing it? 
+\end_layout
+
+\begin_layout Enumerate
+How can you increase your social capital or importance in the fastest, but
+ most robust (
+\begin_inset Quotes eld
+\end_inset
+
+honest,
+\begin_inset Quotes erd
+\end_inset
+
+ irreversible) way? How can we distinguish fake importance from the real
+ thing?
+\end_layout
+
+\begin_layout Section
+Related Work
+\end_layout
+
+\begin_layout Standard
+When looking for influence in social networks, several classes of problems
+ turned out to be closely related to our definition of influence in a community.
+ We addressed them in the additional papers on which this thesis will also
+ build.
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Khrabrov:2003:Attacks"
+
+\end_inset
+
+, we considered the question of network structure which enables the networks
+ to withstand random faults or malicious attacks, taking out some nodes
+ one by one.
+ It is one of the first papers which studied the malicious attacks on a
+ network, and compared behavior of differently structured networks, such
+ as scale-free or random, under different destructuring scenarios.
+ It is an application of dynamic graph analysis, examining how the influential
+ nodes can help keep the network together.
+\end_layout
+
+\begin_layout Standard
+In addition to Twitter, we studied a sensor-based social network, resulting
+ from the MIT Reality experiments 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Eagle:2006:Reality"
+
+\end_inset
+
+.
+ A fundamental question in dynamic systems is the agents' identity.
+ We address it in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Khrabrov:2009:Language"
+
+\end_inset
+
+, where we were able to identify a majority of the MIT Reality participants
+ from just about 10 hops in their cell phone traces.
+ Social importance of the subjects is related to their patterns of action
+ (motion) and resulting interactions.
+\end_layout
+
+\begin_layout Section
+Bibliography
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/Users/alexyk/Documents/Bibliography/khrabrov,/Users/alexyk/Documents/Bibliography/social-capital,/Users/alexyk/Documents/Bibliography/sensing"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Social-Capital-Definitions"
+
+\end_inset
+
+Social Capital Definitions
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "/Users/alexyk/Documents/LaTeX/Learning Graphs/learning-graphs-1.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

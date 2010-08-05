@@ -48,6 +48,15 @@ Mind Economy:
 \end_inset
 
  Social Capital in Social Networks
+\begin_inset Newline newline
+\end_inset
+
+
+\size normal
+Ph.D.
+ Proposal (Short Version)
+\size default
+ 
 \end_layout
 
 \begin_layout Author
@@ -63,6 +72,45 @@ Ph.D.
 \end_inset
 
 Research Associate, Thayer School of Engineering, Dartmouth College
+\end_layout
+
+\begin_layout Abstract
+Social networks such as Twitter and Facebook increase their mindshare daily,
+ and many online activities are determined by the interactions there.
+ In order to understand the dynamics of social networks (
+\begin_inset Quotes eld
+\end_inset
+
+what's happening
+\begin_inset Quotes erd
+\end_inset
+
+), we want to identify the key players -- those participants who are in
+ some way important, influential, and possess certain social capital.
+ Although these terms are used in sociology and computer analysis of static
+ networks, we need to come up with the new and more rigorous definitions
+ in the face of the new users getting on Twitter daily, making the network
+ inherently dynamic.
+ Our solution is a set of dynamic metrics of importance, called D-Rank and
+ StarRank, which allow ranking over time and in comparison to one's audience
+ (network neighborhood).
+ Using these metrics, we uncover fascinating worlds inside Twitter, such
+ as the Justin Bieber ecosystem and Brazilian sport journalists with their
+ fans.
+ Building upon the insights from those communities, we define our version
+ of Karmic Social Capital as an iterative update rule, rewarding those who
+ facilitate balanced and stable communication.
+ Running a complete world emulation with our rules, we end up with the social
+ capital distribution which places the hard-talking 
+\begin_inset Quotes eld
+\end_inset
+
+middle class
+\begin_inset Quotes erd
+\end_inset
+
+ nodes at the top, leading to a new ranking and understanding of the Twitter
+ dynamics.
 \end_layout
 
 \begin_layout Section
@@ -443,6 +491,15 @@ and so can you
 \end_layout
 
 \begin_layout Standard
+Since we place emphasis on frequent and stable cmmunication, another community
+ we see at the top is the Brazilians, and specifically Brazilian sport journalis
+ts.
+ Apparently they use Twitter much more for comunication than for memories
+ or diaries, creating an intense conversational environment full of dialogue,
+ exclamations, and shared emotion.
+\end_layout
+
+\begin_layout Standard
 For the hacker communities, we can check our Social Capital measures against
  the actual coding productivity, followings on GitHub, and question answering
  on the IRC.
@@ -470,6 +527,29 @@ For the hacker communities, we can check our Social Capital measures against
  update rules can be checked against it.
  It will require NLP techniques, the extent of which may be limited in the
  original thesis work, but will constitute an important research direction.
+\end_layout
+
+\begin_layout Standard
+The first results of our full-world Social Capital emulation show a new
+ kind of nodes at the top, in addition to the usual suspects such as Justin
+ Bieber (still in the top 10) -- we call it 
+\begin_inset Quotes eld
+\end_inset
+
+the middle class of social networks.
+\begin_inset Quotes erd
+\end_inset
+
+ These are the people with a certain amount of followers -- though not as
+ many as the stars -- e.g.
+ from a 100 to a 1,000, weaving a web of intense dialogues with other such
+ nodes.
+ They provide the core of the ongoing communication, pushing trends and
+ stars up, bringing uninteresting subjects down by not talking about them,
+ integrating other nodes and beginners into the system.
+ We believe our metrics are more interesting than the traditional PageRank
+ in that they reflect the dynamic nature of the conversational networks
+ and highlight the individuals of lasting contributions and value.
 \end_layout
 
 \begin_layout Section
